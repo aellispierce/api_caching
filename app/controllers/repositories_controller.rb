@@ -6,6 +6,8 @@ class RepositoriesController < ApplicationController
   def show
     @profile = Profile.find_by_username(params[:username]) ||
       Profile.create_from_username(params[:username])
+    @repositories = RepositoryList.new(params[:username]).repositories
+
   end
 
 end

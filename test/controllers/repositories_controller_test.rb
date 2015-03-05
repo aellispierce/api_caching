@@ -35,8 +35,8 @@ class RepositoriesControllerTest < ActionController::TestCase
   test "expired profile cache should generate a new one" do
     get :show, username: "anellis"
     profile = Profile.find_by_username("anellis")
-    profile.update(updated_at: Time.now- 2.days)
     profile.update(location: "Michigan")
+    profile.update(updated_at: Time.now- 2.days)
     get :show, username: "anellis"
     assert_select 'p', "Durham, NC"
   end

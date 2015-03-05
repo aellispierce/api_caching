@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150304174629) do
+ActiveRecord::Schema.define(version: 20150304214312) do
 
   create_table "profiles", force: :cascade do |t|
     t.text     "body"
@@ -26,5 +26,17 @@ ActiveRecord::Schema.define(version: 20150304174629) do
   end
 
   add_index "profiles", ["username"], name: "index_profiles_on_username", unique: true
+
+  create_table "repositories", force: :cascade do |t|
+    t.string   "name"
+    t.string   "url"
+    t.integer  "number_of_forks"
+    t.integer  "number_of_stars"
+    t.datetime "profile_updated_at"
+    t.string   "language"
+    t.integer  "profile_id"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
 
 end

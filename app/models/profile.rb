@@ -1,6 +1,6 @@
 class Profile < ActiveRecord::Base
   validates :username, uniqueness: true
-
+  has_many :repositories
 
   def self.create_from_username(username)
     profile = nil

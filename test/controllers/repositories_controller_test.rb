@@ -23,4 +23,22 @@ class RepositoriesControllerTest < ActionController::TestCase
     assert_select 'a', "Grecian Java"
   end
 
+  test "expired repository cache should generate a new one" do
+    get :show, username: "anellis"
+    repository= Repository.first
+    repository.update(updated_at: Time.now- 3.hours)
+    Repository.first.update(language: "Grecian Java")
+    get :show, username: "anellis"
+    assert_select 'a', "CSS"
+  end
+
+  test "expired profile cache should generate a new one" do
+    get :show, username: "anellis"
+    profile = Profile.find_by_username("anellis")
+    profile.update(updated_at: Time.now- 2.days)
+    profile.update(location: "Michigan")
+    get :show, username: "anellis"
+    assert_select 'p', "Durham, NC"
+  end
+
 end
